@@ -1,0 +1,123 @@
+# ===============================
+# Project: Wheel of Life Tracker
+# ===============================
+
+# -------------------------------
+# General Overview
+# -------------------------------
+# Build a responsive, interactive, and visually appealing "Wheel of Life" web app.
+# Implemented entirely in HTML, CSS, and JavaScript (no backend).
+# Must run locally and deploy cleanly on GitHub Pages.
+
+# -------------------------------
+# Functional Requirements
+# -------------------------------
+
+1. Layout:
+   - Split screen with two vertical panels (responsive):
+     - Left panel: displays aggregated/average scores.
+     - Right panel: allows adding a new entry interactively.
+   - Both panels contain chart visualizations (wheel/pie style).
+
+2. Categories:
+   - Use 8 default life areas:
+     Business / Career,
+     Finances,
+     Health,
+     Family and Friends,
+     Romance,
+     Personal Development,
+     Fun and Recreation,
+     Contribution to Society.
+   - Each segment has its own color.
+
+3. Interactivity:
+   - On right side, user selects levels (1–10) per category directly via interactive chart.
+   - Allow adding a short note and auto-store current date.
+   - Save button stores data locally (no server).
+   - Update left chart to reflect new averages.
+
+4. Data Storage:
+   - Use browser localStorage to persist:
+     - Scores per category
+     - Date of entry
+     - Optional note
+   - Structure example:
+     {
+       "date": "2025-10-07",
+       "scores": {
+         "Career": 8,
+         "Health": 6,
+         ...
+       },
+       "note": "Feeling more balanced this week"
+     }
+
+5. Visualization:
+   - Use Chart.js or D3.js to render:
+     - Radar chart or polar area chart for both panels.
+     - Mini pie charts in history modal.
+   - Include animations and hover tooltips.
+
+6. Entry History:
+   - “View All Entries” button opens modal window.
+   - Display all past entries with:
+     - Mini wheel chart
+     - Date and short note
+   - Option to delete or edit entries.
+
+7. Responsiveness:
+   - Fully responsive design for mobile, tablet, and large screens.
+   - On mobile, stack sections vertically.
+   - Charts resize smoothly and remain touch-friendly.
+
+8. User Interface / Experience:
+   - Clean, minimal aesthetic (Figma/Notion/Linear-inspired).
+   - Rounded corners, gradients, soft shadows.
+   - Light & Dark mode toggle.
+   - Animated transitions (GSAP or anime.js).
+   - Toast or popup after successful save.
+   - Clear Data button to reset localStorage.
+
+9. Export/Import:
+   - Optional feature: export all entries as JSON.
+   - Optional feature: import JSON to restore saved data.
+
+# -------------------------------
+# Technical Requirements
+# -------------------------------
+
+10. Technologies:
+    - HTML5
+    - CSS3 (Flexbox / Grid)
+    - JavaScript (ES6+)
+    - Chart.js (for chart rendering)
+    - GSAP or anime.js (for smooth animations)
+
+11. Files:
+    - index.html
+    - style.css
+    - script.js
+    - (Optional) data.json — for backup/export
+
+12. Deployment:
+    - Purely static (no backend).
+    - Works offline after first load.
+    - Fully compatible with GitHub Pages.
+
+13. Metadata:
+    - Include <meta> tags for viewport and responsiveness.
+    - Include favicon and title: "Wheel of Life Tracker".
+
+# -------------------------------
+# Optional Enhancements
+# -------------------------------
+
+14. Add “Progress Over Time” comparison tab (line chart).
+15. Allow custom categories (user-defined).
+16. Support multiple color themes.
+17. Add data validation (ensure all categories rated before saving).
+
+# -------------------------------
+# End of File
+# -------------------------------

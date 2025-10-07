@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <title>Wheel of Life Tracker</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230ea5e9'/%3E%3Cpath d='M50 2 v96 M2 50 h96 M18 18 l64 64 M18 82 l64-64' stroke='white' stroke-width='6'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+  <!-- GSAP for micro animations -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="logo">◔</span>
+      <h1>Wheel of Life Tracker</h1>
+    </div>
+    <div class="header-actions">
+      <button id="themeToggle" class="btn ghost" aria-label="Toggle theme">🌗</button>
+      <button id="viewEntriesBtn" class="btn">View All Entries</button>
+      <button id="exportBtn" class="btn ghost">Export JSON</button>
+      <button id="importBtn" class="btn ghost">Import JSON</button>
+      <button id="clearDataBtn" class="btn danger">Clear Data</button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <!-- LEFT: Averages -->
+    <section class="panel" id="leftPanel">
+      <h2>Current Averages</h2>
+      <p class="muted">Aggregate of all saved entries. Hover to inspect. Handles empty state.</p>
+      <div class="chart-wrap">
+        <canvas id="avgChart" aria-label="Average Wheel" role="img"></canvas>
+      </div>
+      <div class="stats" id="avgStats"></div>
+    </section>
+
+    <!-- RIGHT: New Entry -->
+    <section class="panel" id="rightPanel">
+      <h2>New Entry</h2>
+      <p class="muted">Tap a spoke in the wheel, then drag in/out to set a value from 0–10. Click again to fine‑tune.</p>
+      <div class="chart-wrap entry">
+        <canvas id="entryChart" aria-label="Entry Wheel" role="img"></canvas>
+      </div>
+      <form id="entryForm" class="entry-form">
+        <div class="row">
+          <label for="entryDate">Date</label>
+          <input type="date" id="entryDate" required />
+        </div>
+        <div class="row">
+          <label for="entryNote">Short note</label>
+          <input type="text" id="entryNote" maxlength="120" placeholder="Feeling more balanced this week" />
+        </div>
+        <div class="actions">
+          <button type="button" id="resetEntryBtn" class="btn ghost">Reset</button>
+          <button type="submit" id="saveBtn" class="btn primary">Save Entry</button>
+        </div>
+        <input type="hidden" id="editId" />
+      </form>
+    </section>
+  </main>
+
+  <!-- Entries Modal -->
+  <dialog id="entriesModal" class="modal">
+    <div class="modal-head">
+      <h3>All Entries</h3>
+      <button class="btn ghost close" id="closeEntries">✕</button>
+    </div>
+    <div id="entriesList" class="entries-list"></div>
+  </dialog>
+
+  <!-- Import Modal -->
+  <dialog id="importModal" class="modal">
+    <div class="modal-head">
+      <h3>Import Data</h3>
+      <button class="btn ghost close" id="closeImport">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="muted">Upload a JSON file to restore your Wheel of Life entries.</p>
+      <div class="import-info">
+        <h4>Expected Format:</h4>
+        <pre><code>[
+  {
+    "id": "1696704000000",
+    "date": "2025-10-07",
+    "scores": {
+      "Business / Career": 8,
+      "Finances": 7,
+      "Health": 6,
+      "Family and Friends": 9,
+      "Romance": 5,
+      "Personal Development": 7,
+      "Fun and Recreation": 8,
+      "Contribution to Society": 6
+    },
+    "note": "Feeling balanced this week"
+  }
+]</code></pre>
+      </div>
+      <div class="file-upload-area">
+        <label for="importFileInput" class="btn primary upload-btn">
+          Choose File
+          <input type="file" id="importFileInput" accept="application/json" hidden />
+        </label>
+        <span id="fileName" class="file-name">No file selected</span>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Entry Detail Modal -->
+  <dialog id="entryDetailModal" class="modal detail-modal">
+    <div class="modal-head">
+      <h3>Entry Details</h3>
+      <button class="btn ghost close" id="closeDetail">✕</button>
+    </div>
+    <div class="modal-body detail-content">
+      <div class="detail-meta">
+        <div class="detail-date"></div>
+        <div class="detail-note"></div>
+      </div>
+      <div class="detail-chart-wrap">
+        <canvas id="detailChart" aria-label="Entry Detail Chart" role="img"></canvas>
+      </div>
+      <div class="detail-scores"></div>
+    </div>
+  </dialog>
+
+  <!-- Toasts -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <footer class="app-footer">
+    <span>Made with ❤ — Works offline after first load.</span>
+  </footer>
+
+  <script>
+    // Register service worker for offline support (GitHub Pages friendly)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {/* noop */});
+      });
+    }
+  </script>
+</body>
+</html>

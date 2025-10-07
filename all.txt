@@ -1,0 +1,42 @@
+Below are the complete files for a static, client‑only Wheel of Life Tracker that runs locally and on GitHub Pages. Create these files in the same folder and open **index.html**.
+
+---
+
+## index.html
+
+```html
+```
+
+---
+
+## style.css
+
+```css
+```
+
+---
+
+## script.js
+
+```javascript
+```
+
+---
+
+## sw.js
+
+```js
+
+```
+
+---
+
+### Notes
+
+* **Interactive input**: Click any spoke on the right chart, drag outward to set 1–10. Touch supported.
+* **Validation**: All categories must be ≥ 1 before saving.
+* **Edit**: Use the modal’s *Edit* to load an entry back into the right panel.
+* **Themes**: Light/Dark remembered between visits.
+* **Offline**: `sw.js` caches assets after first load.
+* **Charts**: Averages use **Radar**; history mini-previews use **Polar Area** to visually distinguish.
+* **Compatibility**: No backend; safe for GitHub Pages.
