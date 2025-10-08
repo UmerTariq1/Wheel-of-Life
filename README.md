@@ -2,8 +2,9 @@
 # Wheel of Life Tracker
 
 <p align="center">
+    
   <a href="https://umertariq1.github.io/Wheel-of-Life/" target="_blank" rel="noopener noreferrer">
-    <img alt="Live Website" src="https://img.shields.io/badge/Live%20Website-umertariq1.github.io-blue?style=for-the-badge&logo=github" />
+    🔗 Visit Live Website
   </a>
 </p>
 
