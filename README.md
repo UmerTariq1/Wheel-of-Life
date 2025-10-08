@@ -1,4 +1,19 @@
 # Wheel of Life Tracker
+# Wheel of Life Tracker
+
+<p align="center">
+  <a href="https://umertariq1.github.io/Wheel-of-Life/" target="_blank" rel="noopener noreferrer">
+    <img alt="Live Website" src="https://img.shields.io/badge/Live%20Website-umertariq1.github.io-blue?style=for-the-badge&logo=github" />
+  </a>
+</p>
+
+<p align="center">
+  <img alt="HTML" src="https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
+  <img alt="CSS" src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+  <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
+</p>
+
+A simple, privacy‑first web app for the “Wheel of Life” — a personal self‑assessment tool that helps you evaluate and visualize balance across key areas of life (career, finances, health, relationships, personal growth, fun, and contribution). Track entries over time and see your overall balance at a glance.
 
 A simple, privacy‑first web app to track balance across key life areas.
 
