@@ -367,7 +367,7 @@
     }
     
     .detail-scores {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
     }
     
     /* Import modal */
@@ -435,6 +435,19 @@
     }
     
     .stat .val {
+      font-size: 16px;
+    }
+    
+    /* Detail scores also in 2 columns with optimized sizing */
+    .detail-score {
+      padding: 8px;
+    }
+    
+    .detail-score .label {
+      font-size: 11px;
+    }
+    
+    .detail-score .value {
       font-size: 16px;
     }
     
