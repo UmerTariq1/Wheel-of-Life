@@ -425,8 +425,17 @@
       padding: 12px;
     }
     
-    .stats {
-      grid-template-columns: 1fr;
+    /* Keep stats in 2 columns for better space usage on mobile */
+    .stat {
+      padding: 8px;
+    }
+    
+    .stat .label {
+      font-size: 11px;
+    }
+    
+    .stat .val {
+      font-size: 16px;
     }
     
     .entry-card .card-actions .btn {
