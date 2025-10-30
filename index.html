@@ -23,6 +23,7 @@
       <h1>Wheel of Life Tracker</h1>
     </div>
     <div class="header-actions">
+      <button id="aboutBtn" class="btn info" aria-label="About"> About</button>
       <button id="themeToggle" class="btn ghost" aria-label="Toggle theme">🌗</button>
       <button id="viewEntriesBtn" class="btn">View All Entries</button>
       <button id="exportBtn" class="btn ghost">Export JSON</button>
@@ -129,6 +130,69 @@
         <canvas id="detailChart" aria-label="Entry Detail Chart" role="img"></canvas>
       </div>
       <div class="detail-scores"></div>
+    </div>
+  </dialog>
+
+  <!-- About Modal -->
+  <dialog id="aboutModal" class="modal about-modal">
+    <div class="modal-head">
+      <h3>About Wheel of Life Tracker</h3>
+      <button class="btn ghost close" id="closeAbout">✕</button>
+    </div>
+    <div class="modal-body about-content">
+      <section class="about-section">
+        <h4>What is the Wheel of Life?</h4>
+        <p>The Wheel of Life is a powerful self-assessment tool used in coaching and personal development to help you visualize the balance across different areas of your life. Each "spoke" of the wheel represents a key life dimension, such as career, health, relationships, and personal growth.</p>
+        <p>By rating your current satisfaction in each area on a scale of 0–10, you create a visual snapshot of your life balance. A perfectly round wheel indicates harmony, while an uneven wheel highlights areas that may need more attention. Regular tracking helps you identify patterns, set goals, and measure progress over time.</p>
+      </section>
+
+      <section class="about-section">
+        <h4>How This App Works</h4>
+        <div class="about-features">
+          <div class="feature-item">
+            <span class="feature-icon">🔒</span>
+            <div>
+              <strong>100% Private & Local</strong>
+              <p>All your data is stored locally in your browser. Nothing is sent to any server, your entries stay completely private on your device.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <span class="feature-icon">💾</span>
+            <div>
+              <strong>Persistent Storage</strong>
+              <p>Your entries are automatically saved and will persist across sessions. Close the tab and come back anytime, your data will still be there.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <span class="feature-icon">📊</span>
+            <div>
+              <strong>Track Your Progress</strong>
+              <p>Create multiple entries over time to track how your life balance evolves. The "Current Averages" chart aggregates all your entries to show overall trends.</p>
+            </div>
+          </div>
+          
+          <div class="feature-item">
+            <span class="feature-icon">📱</span>
+            <div>
+              <strong>Works Offline</strong>
+              <p>After your first visit, this app works completely offline. No internet connection needed to track your progress.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-section">
+        <h4>Quick Tips</h4>
+        <ul class="tips-list">
+          <li><strong>Creating an entry:</strong> Click and drag on each spoke of the wheel to set your satisfaction level (0–10). Fill in all 8 areas before saving.</li>
+          <li><strong>Date tracking:</strong> Each entry is timestamped. You can review past entries by clicking "View All Entries".</li>
+          <li><strong>Export your data:</strong> Use "Export JSON" to download a backup of all your entries. You can import it later if needed.</li>
+          <li><strong>Regular check-ins:</strong> For best results, create a new entry weekly or monthly to track meaningful changes over time.</li>
+          <li><strong>Goal setting:</strong> Use the insights from your wheel to identify which life areas need more attention and set specific improvement goals.</li>
+        </ul>
+      </section>
     </div>
   </dialog>
 

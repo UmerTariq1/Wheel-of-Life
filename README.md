@@ -14,7 +14,7 @@
   <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
 </p>
 
-A simple, privacy‑first web app for the “Wheel of Life” — a personal self‑assessment tool that helps you evaluate and visualize balance across key areas of life (career, finances, health, relationships, personal growth, fun, and contribution). Track entries over time and see your overall balance at a glance.
+A simple, privacy‑first web app for the “Wheel of Life” ,  a personal self‑assessment tool that helps you evaluate and visualize balance across key areas of life (career, finances, health, relationships, personal growth, fun, and contribution). Track entries over time and see your overall balance at a glance.
 
 A simple, privacy‑first web app to track balance across key life areas.
 

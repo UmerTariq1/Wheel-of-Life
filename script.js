@@ -1,5 +1,5 @@
 
-/* Wheel of Life Tracker — Client-only app
+/* Wheel of Life Tracker , Client-only app
  * Storage schema (localStorage key: WOL_ENTRIES_V1):
  * [ { id, date, scores: {Category: value}, note } ]
  */
@@ -45,6 +45,9 @@
     const entryDetailModal = document.getElementById('entryDetailModal');
     const closeDetailBtn = document.getElementById('closeDetail');
     const detailChart = document.getElementById('detailChart');
+    const aboutBtn = document.getElementById('aboutBtn');
+    const aboutModal = document.getElementById('aboutModal');
+    const closeAboutBtn = document.getElementById('closeAbout');
   
     // State
     let entries = loadEntries();
@@ -63,6 +66,9 @@
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem(THEME_KEY, next);
       themeToggle.textContent = next === 'light' ? '🌙' : '🌞';
+      
+      // Update chart label colors for the new theme
+      updateChartLabelColors();
     });
   
     // Date default
@@ -191,7 +197,27 @@
       if (!completionFeedbackShown && entryValues.every(v => v > 0)) {
         completionFeedbackShown = true;
         triggerConfetti();
-        showCelebrationMessage("Great! You've filled in all 8 areas. Make sure the date and note are correct, then hit 'Save Entry' to record your progress.", 3500);
+        showCelebrationMessage("🎉 Nice! All 8 areas done, just check your date and note before saving.", 3500);
+      }
+    }
+  
+    // Update chart label colors when theme changes
+    function updateChartLabelColors() {
+      const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text');
+      
+      if (avgChart.options.scales.r) {
+        avgChart.options.scales.r.pointLabels.color = textColor;
+        avgChart.update();
+      }
+      
+      if (entryChart.options.scales.r) {
+        entryChart.options.scales.r.pointLabels.color = textColor;
+        entryChart.update();
+      }
+      
+      if (detailChartInstance && detailChartInstance.options.scales.r) {
+        detailChartInstance.options.scales.r.pointLabels.color = textColor;
+        detailChartInstance.update();
       }
     }
   
@@ -328,7 +354,7 @@
       } else {
         entries.push(payload);
         triggerConfetti();
-        showCelebrationMessage('Entry saved successfully! 🎉', 2500);
+        showCelebrationMessage('Entry saved successfully! 🎉 Woohoo!', 2500);
       }
       saveEntries(entries);
       renderAvg();
@@ -541,6 +567,17 @@
     }
     
     closeDetailBtn.addEventListener('click', closeEntryDetail);
+
+    // About Modal
+    function openAbout() {
+      aboutModal.showModal();
+    }
+    function closeAbout() {
+      aboutModal.close();
+    }
+    
+    aboutBtn.addEventListener('click', openAbout);
+    closeAboutBtn.addEventListener('click', closeAbout);
 
     // Initial render
     renderAvg();
