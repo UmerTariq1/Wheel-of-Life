@@ -251,7 +251,7 @@
       categories.forEach((c, i) => {
         const div = document.createElement('div');
         div.className = 'stat';
-        div.innerHTML = `<span class="label">${c}</span><span class="val">${avgs[i] || 0}</span>`;
+        div.innerHTML = `<span class="label">${c}</span><span class="val" style="color: ${colors[i]}">${avgs[i] || 0}</span>`;
         avgStats.appendChild(div);
       });
     }
