@@ -94,12 +94,31 @@
   
   .app-footer { text-align: center; padding: 20px; color: var(--muted); }
   
-  /* Modal */
-  .modal { width: min(980px, 96vw); border: none; border-radius: 16px; padding: 0; background: var(--bg-panel); color: var(--text); box-shadow: var(--shadow); }
-  .modal::backdrop { background: rgba(0,0,0,.5); backdrop-filter: blur(2px); }
-  .modal .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid color-mix(in oklab, var(--text) 12%, transparent); }
-  .modal h3 { margin: 0; font-size: 18px; }
-  .modal .modal-body { padding: 20px; }
+/* Modal */
+.modal { width: min(980px, 96vw); border: none; border-radius: 16px; padding: 0; background: var(--bg-panel); color: var(--text); box-shadow: var(--shadow); }
+.modal::backdrop { background: rgba(0,0,0,.5); backdrop-filter: blur(2px); }
+.modal .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid color-mix(in oklab, var(--text) 12%, transparent); }
+.modal h3 { margin: 0; font-size: 18px; }
+.modal .modal-body { padding: 20px; }
+.modal .btn.close {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+  transition: all .2s ease;
+  background: color-mix(in oklab, var(--bg-panel) 92%, var(--text) 8%);
+  box-shadow: none;
+}
+.modal .btn.close:hover {
+  background: color-mix(in oklab, var(--danger) 15%, var(--bg-panel));
+  color: var(--danger);
+  transform: translateY(0) scale(1.05);
+}
   .modal .entries-list { max-height: 70vh; overflow: auto; padding: 16px; display: grid; gap: 12px; }
   .entry-card {
     display: grid; grid-template-columns: 120px 1fr auto; gap: 12px; align-items: center;

@@ -51,6 +51,7 @@
     let entryValues = new Array(categories.length).fill(0); // current entry values 0..10
     let activeIndex = null; // which category is being adjusted via drag
     let isDragging = false;
+    let completionFeedbackShown = false; // track if completion confetti was shown for current entry
   
     // Theme init
     const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
@@ -127,6 +128,73 @@
       gsap.to(toastEl, { delay: 2.2, opacity: 0, y: 20, duration: .35, ease: 'power3.in' });
     }
   
+    // Utility: confetti celebration
+    function triggerConfetti() {
+      const count = 150;
+      const defaults = {
+        origin: { y: 0.7 },
+        zIndex: 9999
+      };
+  
+      function fire(particleRatio, opts) {
+        confetti({
+          ...defaults,
+          ...opts,
+          particleCount: Math.floor(count * particleRatio)
+        });
+      }
+  
+      fire(0.25, {
+        spread: 26,
+        startVelocity: 55,
+      });
+      fire(0.2, {
+        spread: 60,
+      });
+      fire(0.35, {
+        spread: 100,
+        decay: 0.91,
+        scalar: 0.8
+      });
+      fire(0.1, {
+        spread: 120,
+        startVelocity: 25,
+        decay: 0.92,
+        scalar: 1.2
+      });
+      fire(0.1, {
+        spread: 120,
+        startVelocity: 45,
+      });
+    }
+  
+    // Utility: show celebration message
+    function showCelebrationMessage(msg, duration = 3000) {
+      toastEl.textContent = msg;
+      toastEl.style.fontSize = '15px';
+      toastEl.style.maxWidth = '500px';
+      toastEl.style.textAlign = 'center';
+      toastEl.style.lineHeight = '1.5';
+      gsap.killTweensOf(toastEl);
+      gsap.set(toastEl, { y: 40, opacity: 0 });
+      gsap.to(toastEl, { opacity: 1, y: 0, duration: .3, ease: 'power3.out' });
+      gsap.to(toastEl, { delay: duration / 1000, opacity: 0, y: 20, duration: .35, ease: 'power3.in', onComplete: () => {
+        toastEl.style.fontSize = '';
+        toastEl.style.maxWidth = '';
+        toastEl.style.textAlign = '';
+        toastEl.style.lineHeight = '';
+      }});
+    }
+  
+    // Check if all 8 areas are filled and trigger completion feedback
+    function checkCompletionFeedback() {
+      if (!completionFeedbackShown && entryValues.every(v => v > 0)) {
+        completionFeedbackShown = true;
+        triggerConfetti();
+        showCelebrationMessage("Great! You've filled in all 8 areas. Make sure the date and note are correct, then hit 'Save Entry' to record your progress.", 3500);
+      }
+    }
+  
     // Storage helpers
     function loadEntries() {
       try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
@@ -177,6 +245,7 @@
       entryValues[index] = value;
       chart.data.datasets[0].data = entryValues;
       chart.update();
+      checkCompletionFeedback();
     }
     function nearestIndexByAngle(evt, chart) {
       // Map pointer angle to nearest category angle
@@ -232,6 +301,7 @@
       editIdInput.value = '';
       entryNote.value = '';
       entryDate.valueAsNumber = Date.now() - (new Date()).getTimezoneOffset()*60000;
+      completionFeedbackShown = false; // Reset completion feedback flag
     }
     resetEntryBtn.addEventListener('click', resetEntry);
   
@@ -253,10 +323,12 @@
       const idx = entries.findIndex(e => e.id === payload.id);
       if (idx >= 0) {
         entries[idx] = payload;
-        toast('Entry updated.');
+        triggerConfetti();
+        showCelebrationMessage('Entry updated successfully! 🎉', 2500);
       } else {
         entries.push(payload);
-        toast('Entry saved.');
+        triggerConfetti();
+        showCelebrationMessage('Entry saved successfully! 🎉', 2500);
       }
       saveEntries(entries);
       renderAvg();
